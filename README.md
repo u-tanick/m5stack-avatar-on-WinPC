@@ -1,6 +1,6 @@
 # m5stack-avatar-on-WinPC
 
-[m5stack-avatar をPC上で動かす](https://hollyhockberry.hatenablog.com/entry/2023/12/30/144823) という仕組みを元に、デスクトップ上の音量に合わせてアバターの口を開閉させるサンプルです。
+イナバ (id:hollyhockberry)さんの記事にあった[m5stack-avatar をPC上で動かす](https://hollyhockberry.hatenablog.com/entry/2023/12/30/144823) という仕組みを元に、デスクトップ上の音量に合わせてアバターの口を開閉させてみサンプルです。
 
 ![実行イメージ](img/run.jpg)
 
