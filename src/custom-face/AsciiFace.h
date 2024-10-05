@@ -38,7 +38,6 @@ namespace m5avatar
       int h = 6;
       spi->fillRect(x1, y1, w, h, primaryColor);
       spi->fillRect(x2, y2, w, h, primaryColor);
-
     }
   };
 
@@ -61,9 +60,9 @@ namespace m5avatar
       uint32_t y = rect.getTop();
       uint16_t primaryColor = ctx->getColorDepth() == 1 ? 1 : ctx->getColorPalette()->get(COLOR_PRIMARY);
 
-      height = 3;
       if (exp == Expression::Neutral || exp == Expression::Sad)
       {
+        height = 3;
         int x1, y1, x2, y2, x3, y3, x4, y4;
         int a = isLeft ^ (exp == Expression::Sad) ? -1 : 1;
         int dx = a * 3;
@@ -78,6 +77,19 @@ namespace m5avatar
         y4 = y + height / 2 + dy;
         spi->fillTriangle(x1, y1, x2, y2, x3, y3, primaryColor);
         spi->fillTriangle(x2, y2, x3, y3, x4, y4, primaryColor);
+      } else if (exp == Expression::Doubt) {
+        int x0 = x;
+        int y0 = isLeft ? y - 22: y -18;
+        int angl0 = isLeft ? 80: 350;
+        int angl1 = isLeft ? 190: 100;
+        spi->fillEllipseArc(x0, y0, 17, 20, 12, 15, angl0, angl1, primaryColor);
+      } else {
+        int x0 = isLeft ? x - 25 : x + 25;
+        int y0 = isLeft ? y + 8: y + 12;
+        int angl0 = isLeft ? 180: 200;
+        int angl1 = isLeft ? 340: 360;
+        spi->fillEllipseArc(x0, y0, 30, 50, 50, 70, angl0, angl1, primaryColor);
+        spi->fillEllipseArc(x0, y0, 30, 50, 50, 70, angl0, angl1, primaryColor);
       }
     }
   };
@@ -112,39 +124,49 @@ namespace m5avatar
       int x = rect.getLeft();
       int y = rect.getTop();
 
-      int x2 = x*0.71;
-      // 口の ω 部分として2つの楕円を描画
-      int e_rx = 140;
-      int e_ry = y;
-      int e_lx = 183;
-      int e_ly = y;
-      int e_ex = 25;
-      int e_ey = 29;
-      spi->fillEllipse(e_rx, e_ry, e_ex, e_ey, primaryColor);
-      spi->fillEllipse(e_lx, e_ly, e_ex, e_ey, primaryColor);
+        int x0 = rect.getLeft(); // 163
+        int y0 = rect.getTop();  // 148
 
-      // 口の ω を形成するために、少し小さい背景色の楕円を被せる
-      int over_e_rx = e_rx;
-      int over_e_ry = e_ry;
-      int over_e_lx = e_lx;
-      int over_e_ly = e_ly;
-      int over_e_wx = 18;
-      int over_e_wy = 24;
-      spi->fillEllipse(over_e_rx, over_e_ry, over_e_wx, over_e_wy, backgroundColor);
-      spi->fillEllipse(over_e_lx, over_e_ly, over_e_wx, over_e_wy, backgroundColor);
+        // 口の開閉
+        uint32_t mx = x0 - 1;  // 162;
+        uint32_t my = y0 - 18; // 130;
+        uint32_t mrx = 25; // 15
+        uint32_t mry = 33 + 35 * openRatio;
+        spi->fillEllipseArc(mx, my, 0, mrx+3, 0, mry+3, 0, 180, primaryColor);
+        spi->fillEllipseArc(mx, my, 0, mrx, 0, mry, 0, 180, TFT_RED);
 
-      // 口の ω を形成するために、楕円の上部に背景色の四角を被せる
-      int over_r1_rx = x2 - 5;
-      int over_r1_ry = y - 40;
-      int over_r1_rw = 105;
-      int over_r1_rh = 30;
-      spi->fillRect(over_r1_rx, over_r1_ry, over_r1_rw, over_r1_rh, backgroundColor);
-      int over_r2_rx = x2 + 35;
-      int over_r2_ry = y - 10;
-      int over_r2_rw = 25;
-      int over_r2_rh = 12;
-      spi->fillRect(over_r2_rx, over_r2_ry, over_r2_rw, over_r2_rh, backgroundColor);
+        int x2 = x0*0.71;
+        // 口の ω 部分として2つの楕円を描画
+        int e_rx = 140;
+        int e_ry = y0;
+        int e_lx = 183;
+        int e_ly = y0;
+        int e_ex = 25;
+        int e_ey = 29;
+        spi->fillEllipse(e_rx, e_ry, e_ex, e_ey, primaryColor);
+        spi->fillEllipse(e_lx, e_ly, e_ex, e_ey, primaryColor);
 
+        // 口の ω を形成するために、少し小さい背景色の楕円を被せる
+        int over_e_rx = e_rx;
+        int over_e_ry = e_ry;
+        int over_e_lx = e_lx;
+        int over_e_ly = e_ly;
+        int over_e_wx = 18;
+        int over_e_wy = 24;
+        spi->fillEllipse(over_e_rx, over_e_ry, over_e_wx, over_e_wy, backgroundColor);
+        spi->fillEllipse(over_e_lx, over_e_ly, over_e_wx, over_e_wy, backgroundColor);
+
+        // 口の ω を形成するために、楕円の上部に背景色の四角を被せる
+        int over_r1_rx = x2 - 5;
+        int over_r1_ry = y0 - 40;
+        int over_r1_rw = 105;
+        int over_r1_rh = 30;
+        spi->fillRect(over_r1_rx, over_r1_ry, over_r1_rw, over_r1_rh, backgroundColor);
+        int over_r2_rx = x2 + 35;
+        int over_r2_ry = y0 - 10;
+        int over_r2_rw = 25;
+        int over_r2_rh = 12;
+        spi->fillRect(over_r2_rx, over_r2_ry, over_r2_rw, over_r2_rh, backgroundColor);
     }
   };
 

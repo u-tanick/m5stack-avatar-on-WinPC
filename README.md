@@ -4,6 +4,12 @@
 
 ![実行イメージ](img/run.jpg)
 
+おまけでいくつかカスタムアバターも入れておきました。楽しんでいただけたら幸いです。
+
+```
+src/custom-face/**.h
+```
+
 ## 想定環境
 
 - OS：Windows (10で検証済み)
@@ -35,7 +41,18 @@ Windows用のAPI `EndpointVolume API` の `IAudioMeterInformation` クラスの 
 
 ### 実装上の注意点 2
 
-`platformio.ini` に記載されているビルド設定
+`platformio.ini` に記載されているビルド設定をご利用ください。
+
+``` ini
+[env:native]
+platform = native
+build_type = debug
+build_flags = -O0 -xc++ -std=c++14
+    -lSDL2                      ; for Display avatar
+	-DM5GFX_BOARD=board_M5Stack ; for Display avatar
+    -DM5GFX_SCALE=3             ; for Display avatar size
+	-lmmdevapi -luuid -lole32   ; for Get Desktop Volume
+```
 
 ### 実装上の注意点 3
 

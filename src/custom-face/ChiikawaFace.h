@@ -32,7 +32,7 @@ namespace m5avatar
 
       // 黒目全体
       int x0 = isLeft ? x - 17 : x + 19;
-      int y0 = isLeft ? y - 3 : y - 1;
+      int y0 = isLeft ? y - 3 + 20 : y - 1 + 20;
       int r0 = 18;
       spi->fillCircle(x0 + offsetX, y0 + offsetY, r0, primaryColor);
       // 下の三日月
@@ -41,14 +41,12 @@ namespace m5avatar
       int r1x = 12;
       int r1y = 10;
       spi->fillEllipse(x1 + offsetX, y1 + offsetY, r1x, r1y, backgroundColor);
-
       // 上の白目の枠
       int x2 = x0;
       int y2 = y0;
       int r2x = 15;
       int r2y = 11;
       spi->fillEllipse(x2 + offsetX, y2 + offsetY, r2x, r2y, primaryColor);
-
       // 上の白目
       int x3 = x0;
       int y3 = y0 - 4;
@@ -77,26 +75,26 @@ namespace m5avatar
       uint32_t y = rect.getTop();
       uint16_t primaryColor = ctx->getColorDepth() == 1 ? 1 : ctx->getColorPalette()->get(COLOR_PRIMARY);
 
-
-      height = 6;
-      width = isLeft ? 38 : 42;
+      int h0 = 6;
+      int w0 = isLeft ? 38 : 42;
       int x_offset = 2;
       int y_offset = -25;
       int x0 = isLeft ? x - x_offset*3 : x;
       int y0 = isLeft ? y + y_offset - 8 : y + y_offset - 2;
+      y0 = y0 + 20;
 
       int x1, y1, x2, y2, x3, y3, x4, y4;
       int a = isLeft ? 1 : -1;
       int dx = a * 5;
       int dy = a * 5;
-      x1 = isLeft ? x0 - width / 2 : x0 - width / 2;
+      x1 = isLeft ? x0 - w0 / 2 : x0 - w0 / 2;
       x2 = isLeft ? x1 - x_offset  : x1 + x_offset;
-      x4 = isLeft ? x0 + width / 2 : x0 + width / 2;
+      x4 = isLeft ? x0 + w0 / 2 : x0 + w0 / 2;
       x3 = isLeft ? x4 + x_offset  : x4 - x_offset;
-      y1 = y0 - height / 2 - dy;
-      y2 = y0 + height / 2 - dy;
-      y3 = y0 - height / 2 + dy;
-      y4 = y0 + height / 2 + dy;
+      y1 = y0 - h0 / 2 - dy;
+      y2 = y0 + h0 / 2 - dy;
+      y3 = y0 - h0 / 2 + dy;
+      y4 = y0 + h0 / 2 + dy;
       spi->fillTriangle(x1, y1, x2, y2, x3, y3, primaryColor);
       spi->fillTriangle(x2, y2, x3, y3, x4, y4, primaryColor);
     }
@@ -130,9 +128,16 @@ namespace m5avatar
       int x = rect.getLeft() - w / 2;
       int y = rect.getTop() - h / 2 + breath * 2;
 
-
       int x0 = rect.getLeft();
-      int y0 = rect.getTop();
+      int y0 = rect.getTop() + 20;
+
+      // 口
+      uint32_t mx = x0;
+      uint32_t my = y0 - 10;
+      uint32_t mrx = 10 +  6 * openRatio;
+      uint32_t mry = 28 * openRatio;
+      spi->fillEllipseArc(mx, my, 0, mrx, 0, mry, 0, 180, primaryColor);
+      spi->fillEllipseArc(mx, my, 0, mrx-5, 0, mry-5, 0, 180, TFT_RED);
 
       // まずる
       int ag0r = -30;
@@ -147,11 +152,15 @@ namespace m5avatar
       int cyr = y0 - 18;
       int cxl = x0 + (orx - (orx - irx)/2);
       int cyl = y0 - 18;
+      spi->fillEllipseArc(cxr, cyr, 0, irx, 0, iry, ag0r, ag1r, backgroundColor);
+      spi->fillEllipseArc(cxl, cyl, 0, irx, 0, iry, ag0l, ag1l, backgroundColor);
       spi->fillEllipseArc(cxr, cyr, irx, orx, iry, ory, ag0r, ag1r, primaryColor);
       spi->fillEllipseArc(cxl, cyl, irx, orx, iry, ory, ag0l, ag1l, primaryColor);
       spi->fillRect(x0-5, y0-30, 10, 10, backgroundColor);
       // 下唇
-      spi->fillRect(x0-9, y0+8, 18, 5, primaryColor);
+      int xsk = x0 - 8;
+      int ysk = y0 + 8  + 18 * openRatio;
+      spi->fillRect(xsk, ysk, 16, 4, primaryColor);
 
       uint16_t cheekColor = 0;
       cheekColor = M5.Lcd.color565(250,180,200);
@@ -166,8 +175,6 @@ namespace m5avatar
       int chk_y0l = chk_y0r;
       spi->fillEllipse(chk_x0l, chk_y0l, chk_rx, chk_ry, cheekColor);
 
-
-//      spi->fillCircle(chk_x0r, chk_y0r, 2, TFT_BLACK);
       // 右ほほのスラッシュ３つ
       int x1a = chk_x0r;
       int x2a = x1a - 5;
@@ -177,10 +184,6 @@ namespace m5avatar
       int y2a = y1a + 18;
       int y3a = y2a + 3;
       int y4a = y3a - 18;
-//      spi->fillCircle(x1a, y1a, 2, TFT_RED);
-//      spi->fillCircle(x2a, y2a, 2, TFT_BLUE);
-//      spi->fillCircle(x3a, y3a, 2, TFT_GREEN);
-//      spi->fillCircle(x4a, y4a, 2, TFT_GOLD);
       spi->fillTriangle(x1a, y1a, x2a, y2a, x3a, y3a, primaryColor);
       spi->fillTriangle(x1a, y1a, x3a, y3a, x4a, y4a, primaryColor);
 
@@ -192,10 +195,6 @@ namespace m5avatar
       int y2b = y1b + 18;
       int y3b = y2b + 3;
       int y4b = y3b - 18;
-//      spi->fillCircle(x1b, y1b, 2, TFT_RED);
-//      spi->fillCircle(x2b, y2b, 2, TFT_BLUE);
-//      spi->fillCircle(x3b, y3b, 2, TFT_GREEN);
-//      spi->fillCircle(x4b, y4b, 2, TFT_GOLD);
       spi->fillTriangle(x1b, y1b, x2b, y2b, x3b, y3b, primaryColor);
       spi->fillTriangle(x1b, y1b, x3b, y3b, x4b, y4b, primaryColor);
 
@@ -207,10 +206,6 @@ namespace m5avatar
       int y2c = y1c + 18;
       int y3c = y2c + 3;
       int y4c = y3c - 18;
-//      spi->fillCircle(x1c, y1c, 2, TFT_RED);
-//      spi->fillCircle(x2c, y2c, 2, TFT_BLUE);
-//      spi->fillCircle(x3c, y3c, 2, TFT_GREEN);
-//      spi->fillCircle(x4c, y4c, 2, TFT_GOLD);
       spi->fillTriangle(x1c, y1c, x2c, y2c, x3c, y3c, primaryColor);
       spi->fillTriangle(x1c, y1c, x3c, y3c, x4c, y4c, primaryColor);
 
@@ -247,7 +242,6 @@ namespace m5avatar
       y4c = y3c - 18;
       spi->fillTriangle(x1c, y1c, x2c, y2c, x3c, y3c, primaryColor);
       spi->fillTriangle(x1c, y1c, x3c, y3c, x4c, y4c, primaryColor);
-
     }
   };
 

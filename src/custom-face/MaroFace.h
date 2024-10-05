@@ -30,10 +30,9 @@ namespace m5avatar
       uint16_t primaryColor = ctx->getColorDepth() == 1 ? 1 : ctx->getColorPalette()->get(COLOR_PRIMARY);
       uint16_t backgroundColor = ctx->getColorDepth() == 1 ? 0 : ctx->getColorPalette()->get(COLOR_BACKGROUND);
 
-
       int eye_rx = x + 10;
       int eye_lx = x - 10;
-      int eye_y = y;
+      int eye_y = y + 20;
       int eye_r = 30;
       int offset_1 = 10;
       int offset_2 = 10;
@@ -70,14 +69,13 @@ namespace m5avatar
       uint32_t y = rect.getTop();
       uint16_t primaryColor = ctx->getColorDepth() == 1 ? 1 : ctx->getColorPalette()->get(COLOR_PRIMARY);
 
-      int mx = isLeft ? x-7 : x;
-      int my = y - 20;
+      int x0 = isLeft ? x-7 : x;
+      int y0 = y - 20 + 20;
       int rx = 16;
       int ry = 10;
       int x_offset = isLeft ? -23 : 23;
       int y_offset = isLeft ? -12 : -7;
-      spi->fillEllipse(mx+x_offset, my+y_offset, rx, ry, primaryColor);
-
+      spi->fillEllipse(x0+x_offset, y0+y_offset, rx, ry, primaryColor);
     }
   };
 

@@ -110,12 +110,17 @@ namespace m5avatar
     void draw(M5Canvas *spi, BoundingRect rect, DrawContext *ctx)
     {
       uint16_t primaryColor = ctx->getColorDepth() == 1 ? 1 : ctx->getColorPalette()->get(COLOR_PRIMARY);
+      float openRatio = ctx->getMouthOpenRatio();
 
-      int w = 53;
-      int h = 33;
-      int x = rect.getLeft() - w/2;
-      int y = rect.getTop() + 42;
-      spi->fillTriangle(x, y, x+w, y, x+w/2, y-h, primaryColor);
+      int w0 = 53;
+      int h0 = 33;
+      int x0 = rect.getLeft() - w0/2;
+      int y0 = rect.getTop() + 42;
+      int x1 = x0 + w0;
+      int y1 = y0;
+      int x2 = x0 + w0/2;
+      int y2 = y0 - h0*(openRatio/1.5 + 0.75);
+      spi->fillTriangle(x0, y0, x1, y1, x2, y2, primaryColor);
     }
   };
 

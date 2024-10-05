@@ -7,8 +7,18 @@
 #include <M5Unified.h>
 #include <M5GFX.h>
 #include <Avatar.h>
+#include "custom-face/AsciiFace.h"
+#include "custom-face/ChiikawaFace.h"
+#include "custom-face/DanboFace.h"
+#include "custom-face/GirlFace.h"
+#include "custom-face/KenFace.h"
+#include "custom-face/MaroFace.h"
 
 using namespace m5avatar;
+Avatar avatar;
+
+// ----------------------------------------------------------
+// デスクトップ上の音量取得関連
 
 __CRT_UUID_DECL(IAudioMeterInformation, 0xC02216F6, 0x8C67, 0x4B5B, 0x9D, 0x00, 0xD0, 0x08, 0xE7, 0x3E, 0x00, 0x64);
 
@@ -72,13 +82,32 @@ float getVolumeLevel() {
     return peakLevel;
 }
 
-Avatar avatar;
-
+// ----------------------------------------------------------
 void setup() {
     M5.begin();
+
+    // カラーセット変更用
+    // デフォルト
+    // COLOR_PRIMARY -> TFT_WHITE
+    // COLOR_BACKGROUND -> TFT_BLACK
+    ColorPalette *cp;
+    cp = new ColorPalette();
+    cp->set(COLOR_PRIMARY, TFT_BLACK);
+    cp->set(COLOR_BACKGROUND, TFT_WHITE);
+    avatar.setColorPalette(*cp);
+
+    // カスタムアバター（サンプル、未定義の場合デフォルトのｽﾀｯｸﾁｬﾝの顔）
+    // avatar.setFace(new AsciiFace());
+    // avatar.setFace(new ChiikawaFace());
+    // avatar.setFace(new DanboFace());
+    // avatar.setFace(new GirlFace());
+    // avatar.setFace(new KenFace());
+    // avatar.setFace(new MaroFace());
+
     avatar.init(8);
 }
 
+// ----------------------------------------------------------
 using lgfx::v1::delay;
 void loop() {
     M5.update();

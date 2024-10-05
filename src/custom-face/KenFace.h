@@ -30,13 +30,8 @@ namespace m5avatar
       uint16_t primaryColor = ctx->getColorDepth() == 1 ? 1 : ctx->getColorPalette()->get(COLOR_PRIMARY);
       uint16_t backgroundColor = ctx->getColorDepth() == 1 ? 0 : ctx->getColorPalette()->get(COLOR_BACKGROUND);
 
-/**
- * LX : 90
- * RX : 230
-*/
       int x0 = isLeft ? x - 35 : x - 40;
       int y0 = y - 8;
-//      spi->fillRect(x0, y0, 1, 1, TFT_RED);
       int w0 = 80;
       int w1 = 75;
       // 瞳
@@ -139,13 +134,8 @@ namespace m5avatar
       uint32_t y = rect.getTop();
       uint16_t primaryColor = ctx->getColorDepth() == 1 ? 1 : ctx->getColorPalette()->get(COLOR_PRIMARY);
 
-
       int x0 = isLeft ? x - 45: x + 45;
       int y0 = y + 15;
-
-//      spi->fillRect(x, y, 2, 2, TFT_RED);
-//      spi->fillRect(x0, y0, 2, 2, TFT_BLUE);
-
       // 微調整
       x0 = isLeft ? x0 - 10: x0;
       y0 = isLeft ? y0 - 2: y0;
@@ -173,7 +163,6 @@ namespace m5avatar
       spi->fillTriangle(x1eb3, y1eb3, x2eb3, y2eb3, x3eb3, y3eb3, primaryColor);
 
       // 眉間
-      //spi->fillCircle(x0, y0, 2, TFT_RED);
       int x1m1 = isLeft ? x0 + 4 : x0 + 7;
       int x2m1 = isLeft ? x1m1 - 5 : x1m1 + 5;
       int x3m1 = isLeft ? x1m1 - 7 : x1m1 + 9;
@@ -185,49 +174,36 @@ namespace m5avatar
       // 眉の端１
       int x1ebe1 = isLeft ? x3eb3 + 3 : x3eb3 - 3;
       int y1ebe1 = y3eb3 + 2;
-//      spi->fillCircle(x1ebe1, y1ebe1, 1, TFT_RED);
       int x1ebe2 = isLeft ? x1ebe1 - 8 : x1ebe1 + 8;
       int y1ebe2 = y3eb2 + 1;
-//      spi->fillCircle(x1ebe2, y1ebe2, 1, TFT_BLUE);
       int x1ebe3 = isLeft ? x1ebe2 + 4 : x1ebe2 - 4;
       int y1ebe3 = y1ebe2 + 1;
-//      spi->fillCircle(x1ebe3, y1ebe3, 1, TFT_GREEN);
       int x1ebe4 = isLeft ? x1ebe1 + 5 : x1ebe1 - 5;
       int y1ebe4 = y1ebe1 + 2;
-//      spi->fillCircle(x1ebe4, y1ebe4, 1, TFT_GOLD);
       spi->fillTriangle(x1ebe1, y1ebe1, x1ebe2, y1ebe2, x1ebe3, y1ebe3, primaryColor);
       spi->fillTriangle(x1ebe1, y1ebe1, x1ebe3, y1ebe3, x1ebe4, y1ebe4, primaryColor);
       // 眉の端２
       int x2ebe1 = isLeft ? x1ebe4 + 3 : x1ebe4 - 3;
       int y2ebe1 = y1ebe4 + 6;
-//      spi->fillCircle(x2ebe1, y2ebe1, 1, TFT_RED);
       int x2ebe2 = isLeft ? x2ebe1 - 8 : x2ebe1 + 8;
       int y2ebe2 = y2ebe1 + 21;
-//      spi->fillCircle(x2ebe2, y2ebe2, 1, TFT_BLUE);
       int x2ebe3 = isLeft ? x2ebe1 -4 : x2ebe1 + 4;
       int y2ebe3 = y2ebe2 + 2;
-//      spi->fillCircle(x2ebe3, y2ebe3, 1, TFT_GREEN);
       int x2ebe4 = isLeft ? x2ebe1 + 5 : x2ebe1 - 5;
       int y2ebe4 = y2ebe1 + 2;
-//      spi->fillCircle(x2ebe4, y2ebe4, 1, TFT_GOLD);
       spi->fillTriangle(x2ebe1, y2ebe1, x2ebe2, y2ebe2, x2ebe3, y2ebe3, primaryColor);
       spi->fillTriangle(x2ebe1, y2ebe1, x2ebe3, y2ebe3, x2ebe4, y2ebe4, primaryColor);
       // 眉の端３
       int x3ebe1 = isLeft ? x2ebe4 + 3 : x2ebe4 - 3;
       int y3ebe1 = y2ebe4 + 8;
-//      spi->fillCircle(x3ebe1, y3ebe1, 1, TFT_RED);
       int x3ebe2 = isLeft ? x3ebe1 - 8 : x3ebe1 + 8;
       int y3ebe2 = y3ebe1 + 15;
-//      spi->fillCircle(x3ebe2, y3ebe2, 1, TFT_BLUE);
       int x3ebe3 = isLeft ? x3ebe1 - 4 : x3ebe1 + 4;
       int y3ebe3 = y3ebe2 + 2;
-//      spi->fillCircle(x3ebe3, y3ebe3, 1, TFT_GREEN);
       int x3ebe4 = isLeft ? x3ebe1 + 4 : x3ebe1 - 4;
       int y3ebe4 = y3ebe1 + 4;
-//      spi->fillCircle(x3ebe4, y3ebe4, 1, TFT_GOLD);
       spi->fillTriangle(x3ebe1, y3ebe1, x3ebe2, y3ebe2, x3ebe3, y3ebe3, primaryColor);
       spi->fillTriangle(x3ebe1, y3ebe1, x3ebe3, y3ebe3, x3ebe4, y3ebe4, primaryColor);
-
     }
   };
 
@@ -261,7 +237,17 @@ namespace m5avatar
 
       int x0 = rect.getLeft() - minWidth;
       int y0 = rect.getTop() + 25;
-      spi->fillRect(x0+minWidth/2+5, y0, minWidth-10, 4, primaryColor);
+
+      int xm = x0+minWidth/2+5;
+      int ym = y0;
+      int wm = minWidth-10;
+      int hm = 4;
+      int xmo = xm - openRatio * 24;
+      int ymo = ym + openRatio * 12;
+      int wmo = wm + openRatio * 48;
+      int hmo = hm;
+      spi->fillRect(xmo, ymo, wmo, hmo, primaryColor);
+      spi->fillRect(xm, ym, wm, hm, primaryColor);
       int x1r = x0;
       int x2r = x0 + 2;
       int x3r = x0 + minWidth + 10;
@@ -277,8 +263,11 @@ namespace m5avatar
       int y3l = y0 - 8;
       spi->fillTriangle(x1l, y1l, x2l, y2l, x3l, y3l, primaryColor);
       spi->fillRect(x0+minWidth/2, y0-20, minWidth, 20, backgroundColor);
-      spi->fillRect(x0+minWidth/2+5, y0+20, minWidth-10, 15, primaryColor);
-
+      int x2 = x0 + minWidth/2 + 5;
+      int y2 = y0 + 20 + openRatio * 4;
+      int w2 = minWidth - 10;
+      int h2 = 12;
+      spi->fillRect(x2, y2, w2, h2, primaryColor);
     }
   };
 
