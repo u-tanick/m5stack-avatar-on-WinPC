@@ -10,7 +10,9 @@
 src/custom-face/**.h
 ```
 
-初期状態ではこの `オリジナルのカスタムアバター` のために `改修版の M5Stack-Avatar (lib/m5stack-avatar-custom-u-tanick)` を利用しています。
+![カスタムアバター](img/custom-faces.jpg)
+
+初期状態ではこの `オリジナルのカスタムアバター` のために `ちょっと改修した版の M5Stack-Avatar (lib/m5stack-avatar-custom-u-tanick)` を利用しています。
 いつものスタックチャンの顔 [・__・] だけを使う場合は、`platformio.ini` の以下のコメントアウトを外し、不要な改修版のライブラリを削除してください。
 
 ```

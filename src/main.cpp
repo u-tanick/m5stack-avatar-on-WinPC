@@ -92,8 +92,10 @@ void setup() {
     // COLOR_BACKGROUND -> TFT_BLACK
     ColorPalette *cp;
     cp = new ColorPalette();
-    cp->set(COLOR_PRIMARY, TFT_BLACK);
-    cp->set(COLOR_BACKGROUND, TFT_WHITE);
+    cp->set(COLOR_PRIMARY, TFT_WHITE);
+    cp->set(COLOR_BACKGROUND, TFT_BLACK);
+    // cp->set(COLOR_PRIMARY, TFT_BLACK);
+    // cp->set(COLOR_BACKGROUND, TFT_WHITE);
     avatar.setColorPalette(*cp);
 
     // カスタムアバター（サンプル、未定義の場合デフォルトのｽﾀｯｸﾁｬﾝの顔）
