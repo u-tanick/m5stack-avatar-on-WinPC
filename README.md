@@ -60,7 +60,6 @@ Windows用のAPI `EndpointVolume API` の `IAudioMeterInformation` クラスの 
 
 ``` ini
 [env:native]
-[env:native]
 platform = native
 build_type = debug
 build_flags = -O0 -xc++ -std=c++14
