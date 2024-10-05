@@ -10,6 +10,19 @@
 src/custom-face/**.h
 ```
 
+初期状態ではこの `オリジナルのカスタムアバター` のために `改修版の M5Stack-Avatar (lib/m5stack-avatar-custom-u-tanick)` を利用しています。
+いつものスタックチャンの顔 [・__・] だけを使う場合は、`platformio.ini` の以下のコメントアウトを外し、不要な改修版のライブラリを削除してください。
+
+```
+    コメントアウトする
+    - platformio.ini
+    meganetaaan/M5Stack-Avatar@^0.10.0
+
+    削除する
+    - lib/m5stack-avatar-custom-u-tanick
+```
+
+
 ## 想定環境
 
 - OS：Windows (10で検証済み)
@@ -45,13 +58,17 @@ Windows用のAPI `EndpointVolume API` の `IAudioMeterInformation` クラスの 
 
 ``` ini
 [env:native]
+[env:native]
 platform = native
 build_type = debug
 build_flags = -O0 -xc++ -std=c++14
     -lSDL2                      ; for Display avatar
-	-DM5GFX_BOARD=board_M5Stack ; for Display avatar
+    -DM5GFX_BOARD=board_M5Stack ; for Display avatar
     -DM5GFX_SCALE=3             ; for Display avatar size
-	-lmmdevapi -luuid -lole32   ; for Get Desktop Volume
+    -lmmdevapi -luuid -lole32   ; for Get Desktop Volume
+lib_deps = 
+    m5stack/M5Unified@^0.1.17
+    meganetaaan/M5Stack-Avatar@^0.10.0
 ```
 
 ### 実装上の注意点 3
