@@ -16,7 +16,7 @@ src/custom-face/**.h
 いつものスタックチャンの顔 [・__・] だけを使う場合は、`platformio.ini` の以下のコメントアウトを外し、不要な改修版のライブラリを削除してください。
 
 ```
-    コメントアウトする
+    コメントアウトをはずす
     - platformio.ini
     meganetaaan/M5Stack-Avatar@^0.10.0
 
