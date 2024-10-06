@@ -30,7 +30,7 @@ src/custom-face/**.h
 - OS：Windows (10で検証済み)
 - エディタ：VS Code
 - ビルド環境：PlatformIO
-- GCCコンパイラ：MSYS2 / MINGW64
+- GCCコンパイラ：[MSYS2](https://www.msys2.org/)
 
 実行環境の構築手順は、わしし(@washishi)さんの [Windows PC で m5stack-avatar を動かすメモ](https://docs.google.com/document/d/1N2fPjT6mMBsgWveFVOO5G3LqvsJwLMW36_ze6kAsbVA/edit) が参考になります。  
 作者もこの手順で構築した環境で開発してました。
