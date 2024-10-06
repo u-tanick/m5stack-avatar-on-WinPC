@@ -1,6 +1,6 @@
 # m5stack-avatar-on-WinPC
 
-イナバ (id:hollyhockberry)さんの記事にあった[m5stack-avatar をPC上で動かす](https://hollyhockberry.hatenablog.com/entry/2023/12/30/144823) という仕組みを元に、デスクトップ上の音量に合わせてアバターの口を開閉させてみたサンプルです。
+イナバ(@hollyhockberry)さんの記事にあった[m5stack-avatar をPC上で動かす](https://hollyhockberry.hatenablog.com/entry/2023/12/30/144823) という仕組みを元に、デスクトップ上の音量に合わせてアバターの口を開閉させてみたサンプルです。
 
 ![実行イメージ](img/run.jpg)
 
@@ -25,10 +25,16 @@ src/custom-face/**.h
 ```
 
 
-## 想定環境
+## 実行環境
 
 - OS：Windows (10で検証済み)
-- ビルド環境：VS Code & PlatformIO
+- エディタ：VS Code
+- ビルド環境：PlatformIO
+- GCCコンパイラ：MSYS2 / MINGW64
+
+実行環境の構築手順は、わしし(@washishi)さんの [Windows PC で m5stack-avatar を動かすメモ](https://docs.google.com/document/d/1N2fPjT6mMBsgWveFVOO5G3LqvsJwLMW36_ze6kAsbVA/edit) が参考になります。  
+作者もこの手順で構築した環境で開発してました。
+
 
 ## 実行手順
 
