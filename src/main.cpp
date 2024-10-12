@@ -84,7 +84,8 @@ float getVolumeLevel() {
 
 // ----------------------------------------------------------
 void setup() {
-    M5.begin();
+	auto cfg = M5.config();		/// 設定用の構造体を取得。
+	M5.begin(cfg);				/// M5Unifiedを使用する準備をする。
 
     // カラーセット変更用
     // デフォルト
